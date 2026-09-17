@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 const GalleryApp = () => {
   const [userData, setUserData] = useState([]);
   const [Page, setPage] = useState(1)
-  {console.log(Page);}
   
   useEffect(function (){
     getData();
   },[Page])
   let printUserData = <h3 className="text-gray-300 translate-x-1/2 absolute top-1/2 left-[42%] font-bold text-2xl">Loading...</h3>
   if(userData.length>0){
+
     printUserData = userData.map((elem, idx) => {
           return (
             <div className="h-50 w-72 p-2" key={idx}>
@@ -40,10 +40,12 @@ const GalleryApp = () => {
 
       <div className=" flex gap-3 flex-wrap py-2">
         {printUserData}
-      <div className="flex justify-center items-center gap-4 w-screen mt-8">
+        {userData.length>0 && ( 
+      <div className="flex justify-center items-center gap-4 w-screen mt-8 " >
         <button className="bg-yellow-500 rounded-2xl text-black px-4 py-2 " onClick={() => { if (Page>1)setPage(Page-1); setUserData([]); } }>Prev</button>
+        <h3 className="text-white">Page {Page}</h3>
         <button className="bg-yellow-500 rounded-2xl text-black px-4 py-2 "  onClick={() => {setPage(Page+1); setUserData([])}}>Next</button>
-      </div>
+        </div>)}
       </div>
     </div>
   );
